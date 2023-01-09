@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 
 class TEXTINPUTE extends StatelessWidget {
-   TEXTINPUTE({Key? key,   this.Controller, this.Hint, this.Validator}) : super(key: key);
+   TEXTINPUTE({Key? key,   this.Controller, this.Hint, this.Validator , this.textDirection , this.textAlign}) : super(key: key);
 final Controller;
 final Hint;
 final Validator;
+TextDirection? textDirection = TextDirection.ltr;
+TextAlign? textAlign = TextAlign.left;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+
+
+      textAlign: textAlign!,
+      textDirection: textDirection,
       controller: Controller,
       validator: Validator,
       keyboardType: TextInputType.emailAddress,

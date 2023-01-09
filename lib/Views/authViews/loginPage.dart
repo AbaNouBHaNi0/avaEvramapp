@@ -85,7 +85,7 @@ class loginPage extends GetWidget<AuthViewModel> {
                       child: Column(
                         children: [
                           TEXTINPUTE(
-
+                            textAlign: TextAlign.left,
                             Validator: (value) {
                             if (value == null || value.isEmpty) {
                              return 'Enter a valid Email';
@@ -147,9 +147,10 @@ class loginPage extends GetWidget<AuthViewModel> {
                             child: MaterialButton(
                               color: Colors.blue,
                               onPressed: () {
+
                                 if (_formKey.currentState!.validate())
                                   {
-                                    controller.loginWithemailAndpassword(
+                                       controller.loginWithemailAndpassword(
                                       emailAddress: emailController.text,
                                       password: passwordController.text);
                                   }
