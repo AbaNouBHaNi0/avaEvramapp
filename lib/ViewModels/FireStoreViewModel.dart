@@ -25,6 +25,7 @@ class FireStoreViewModel extends GetxController {
           'bithDate': data.bithDate, // Stokes and Sons
           'Zone': data.Zone,
           'full_name': data.fullName,
+          'added_by':data.Added_by,
           'Num_of_attendance': 0 // 42
         })
         .then((value) => print("User Added"))
