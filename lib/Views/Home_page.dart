@@ -231,11 +231,11 @@ class Home extends GetWidget<FireStoreViewModel> {
                           ],
                         ),
                         onTap: () {
-                          controller.getAllUsers(collectionId: 'users');
+
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) =>const seeAlldata()));
+                                  builder: (context) => seeAlldata()));
                         },
                       ),
                     ),
