@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:get/route_manager.dart';
 
-var list = [];
+Map? dataMap;
 class FireStoreViewModel extends GetxController {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
@@ -32,18 +32,5 @@ class FireStoreViewModel extends GetxController {
         .catchError((error) => print("Failed to add user: $error"));
   }
 
-  Future getAllUsers({
-    required String collectionId,})
-   async{
 
-
-       firestore.collection(collectionId).get().then((value) => {
-            value.docs.forEach ((result){
-               result.data();
-               print(result.data());
-
-            }),
-          });
-
-  }
 }
