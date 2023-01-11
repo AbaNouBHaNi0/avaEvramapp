@@ -1,6 +1,7 @@
 import 'package:auth_with_get/Shared/Components.dart';
 import 'package:auth_with_get/Views/authViews/loginPage.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
 import '../../ViewModels/AuthViewModel.dart';
 
@@ -19,8 +20,8 @@ class Registration extends GetWidget<AuthViewModel> {
         key: _formKey,
         child: Center(
             child: SingleChildScrollView(
-          child: Column(
-            children: [
+              child: Column(
+                children: [
               const Text(
                 'Registration',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40),
@@ -58,6 +59,8 @@ class Registration extends GetWidget<AuthViewModel> {
                     child: Column(
                       children: [
                         TEXTINPUTE(
+                          icon: Icons.person,
+                          keyBoard: TextInputType.text,
                           Controller: fullname,
                           textAlign: TextAlign.left,
                           Hint: "Full Name",
@@ -72,6 +75,8 @@ class Registration extends GetWidget<AuthViewModel> {
                           height: 15,
                         ),
                         TEXTINPUTE(
+                          icon: Icons.email,
+                          keyBoard: TextInputType.emailAddress,
                           Controller: emailController,
                           textAlign: TextAlign.left,
                           Hint: "Email",
@@ -85,83 +90,77 @@ class Registration extends GetWidget<AuthViewModel> {
                         const SizedBox(
                           height: 15,
                         ),
-                        TextFormField(
-                          controller: passwordController,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Enter your password';
-                            }
-                            return null;
-                          },
-                          keyboardType: TextInputType.visiblePassword,
-                          obscuringCharacter: "*",
-                          obscureText: hide,
-                          enableSuggestions: false,
-                          autocorrect: false,
-                          decoration: InputDecoration(
-                            prefixIcon: const Icon(Icons.lock),
-                            suffixIcon: IconButton(
-                              icon: const Icon(Icons.remove_red_eye_outlined),
-                              onPressed: () {
-                                // setState(() {
-                                //   if (hide == true) {
-                                //     hide = false;
-                                //   } else {
-                                //     hide = true;
-                                //   }
-                                // });
-                              },
-                            ),
-                            labelText: "Enter password",
-                            //icon:  Icon(Icons.lock),
-                            fillColor: Colors.white,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: const BorderSide(),
+                        Obx(()=>
+                           TextFormField(
+                            controller: passwordController,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Enter your password';
+                              }
+                              return null;
+                            },
+                            keyboardType: TextInputType.visiblePassword,
+                            obscuringCharacter: "*",
+                            obscureText: controller.isPasswordhidden.value,
+                            enableSuggestions: false,
+                            autocorrect: false,
+                            decoration: InputDecoration(
+                              prefixIcon: const Icon(Icons.lock),
+                              suffixIcon: IconButton(
+                                icon: const Icon(Icons.remove_red_eye_outlined),
+                                onPressed: () {
+                                  controller.isPasswordhidden.value=
+                                  !controller.isPasswordhidden.value;
+                                },
+                              ),
+                              labelText: "Enter password",
+                              //icon:  Icon(Icons.lock),
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: const BorderSide(),
 
-                              //fillColor: Colors.green
+                                //fillColor: Colors.green
+                              ),
                             ),
                           ),
                         ),
                         const SizedBox(
                           height: 15,
                         ),
-                        TextFormField(
-                          validator: (value) {
-                            if (value.toString() != passwordController.text ||
-                                value == null ||
-                                value.isEmpty) {
-                              return 'Re enter the password correctly';
-                            }
-                            return null;
-                          },
-                          keyboardType: TextInputType.visiblePassword,
-                          obscuringCharacter: "*",
-                          obscureText: hide,
-                          enableSuggestions: false,
-                          autocorrect: false,
-                          decoration: InputDecoration(
-                            prefixIcon: const Icon(Icons.lock),
-                            suffixIcon: IconButton(
-                              icon: const Icon(Icons.remove_red_eye_outlined),
-                              onPressed: () {
-                                // setState(() {
-                                //   if (hide == true) {
-                                //     hide = false;
-                                //   } else {
-                                //     hide = true;
-                                //   }
-                                // });
-                              },
-                            ),
-                            labelText: "Re-Enter password",
-                            //icon:  Icon(Icons.lock),
-                            fillColor: Colors.white,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: const BorderSide(),
+                        Obx(()=>
+                           TextFormField(
+                            validator: (value) {
+                              if (value.toString() != passwordController.text ||
+                                  value == null ||
+                                  value.isEmpty) {
+                                return 'Re enter the password correctly';
+                              }
+                              return null;
+                            },
+                            keyboardType: TextInputType.visiblePassword,
+                            obscuringCharacter: "*",
+                            obscureText: controller.isPasswordhidden.value,
+                            enableSuggestions: false,
+                            autocorrect: false,
+                            decoration: InputDecoration(
+                              prefixIcon: const Icon(Icons.lock),
+                              suffixIcon: IconButton(
+                                icon: const Icon(Icons.remove_red_eye_outlined),
+                                onPressed: () {
+                                  controller.isPasswordhidden.value=
+                                  !controller.isPasswordhidden.value;
+                                },
+                              ),
+                              labelText: "Re-Enter password",
+                              //icon:  Icon(Icons.lock),
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: const BorderSide(),
 
-                              //fillColor: Colors.green
+                                //fillColor: Colors.green
+                              ),
                             ),
                           ),
                         ),
@@ -181,11 +180,8 @@ class Registration extends GetWidget<AuthViewModel> {
                                     password: passwordController.text);
                               }
                             },
-                            child: const Text("REGISTER",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 28,
-                                    fontFamily: "Timesnewroman")),
+                            child:  Text("REGISTER",
+                                style: textStyle()),
                           ),
                         )
                       ],

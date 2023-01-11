@@ -84,7 +84,10 @@ class loginPage extends GetWidget<AuthViewModel> {
                       padding: const EdgeInsets.all(20.0),
                       child: Column(
                         children: [
+                          ///Email Input
                           TEXTINPUTE(
+                            icon: Icons.email,
+                            keyBoard: TextInputType.emailAddress,
                             textAlign: TextAlign.left,
                             Validator: (value) {
                             if (value == null || value.isEmpty) {
@@ -98,43 +101,40 @@ class loginPage extends GetWidget<AuthViewModel> {
                           const SizedBox(
                             height: 15,
                           ),
-                          TextFormField(
+                          Obx(()=>
+                             TextFormField(
+                              controller: passwordController,
+                              keyboardType: TextInputType.visiblePassword,
+                              obscuringCharacter: "*",
+                              obscureText: controller.isPasswordhidden.value,
+                              enableSuggestions: false,
+                              autocorrect: false,
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Enter the password';
+                                }
+                                return null;
+                              },
+                              decoration: InputDecoration(
+                                prefixIcon: const Icon(Icons.lock),
 
-                            controller: passwordController,
-                            keyboardType: TextInputType.visiblePassword,
-                            obscuringCharacter: "*",
-                            obscureText: hide,
-                            enableSuggestions: false,
-                            autocorrect: false,
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Enter the password';
-                              }
-                              return null;
-                            },
-                            decoration: InputDecoration(
-                              prefixIcon: const Icon(Icons.lock),
+                                suffixIcon: IconButton(
+                                  icon: const Icon(Icons.remove_red_eye_outlined),
+                                  onPressed: () {
+                                    controller.isPasswordhidden.value=
+                                    !controller.isPasswordhidden.value;
 
-                              suffixIcon: IconButton(
-                                icon: const Icon(Icons.remove_red_eye_outlined),
-                                onPressed: () {
-                                  // setState(() {
-                                  //   if (hide == true) {
-                                  //     hide = false;
-                                  //   } else {
-                                  //     hide = true;
-                                  //   }
-                                  // });
-                                },
-                              ),
-                              labelText: "Enter password",
-                              //icon:  Icon(Icons.lock),
-                              fillColor: Colors.white,
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: const BorderSide(),
+                                  },
+                                ),
+                                labelText: "Enter password",
+                                //icon:  Icon(Icons.lock),
+                                fillColor: Colors.white,
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: const BorderSide(),
 
-                                //fillColor: Colors.green
+                                  //fillColor: Colors.green
+                                ),
                               ),
                             ),
                           ),

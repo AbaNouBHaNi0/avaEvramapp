@@ -1,19 +1,21 @@
 import 'package:auth_with_get/Models/UserModel.dart';
 import 'package:auth_with_get/Shared/Components.dart';
 import 'package:auth_with_get/ViewModels/AuthViewModel.dart';
-import 'package:auth_with_get/ViewModels/FireStoreViewModel.dart';
+import 'package:auth_with_get/ViewModels/addUserviewMoudel.dart';
 import 'package:auth_with_get/Views/Home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 
-class Add_account extends GetWidget<FireStoreViewModel> {
-  Add_account({Key? key} ) : super(key: key);
+// ignore: camel_case_types
+class addAccount extends GetWidget<addUserviewModel> {
+  addAccount({Key? key} ) : super(key: key);
+
   final injection = AuthViewModel();
   final _formKey = GlobalKey<FormState>();
   var fullName = TextEditingController();
-  var Zone = TextEditingController();
+  var zone = TextEditingController();
   var bithDate = TextEditingController();
   var phoneNumber = TextEditingController();
 
@@ -37,16 +39,16 @@ class Add_account extends GetWidget<FireStoreViewModel> {
         key: _formKey,
         child: Center(
             child: SingleChildScrollView(
-          child: Column(
-            children: [
-              const Text(
+              child: Column(
+               children: [
+                const Text(
                 'اضافه مخدوم',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40),
               ),
               const SizedBox(
                 height: 15,
               ),
-              Container(
+                Container(
                   decoration: BoxDecoration(
                       border: Border.all(
                         color: Colors.blue,
@@ -58,9 +60,9 @@ class Add_account extends GetWidget<FireStoreViewModel> {
                     height: 5,
                     color: Colors.transparent,
                   )),
-              Padding(
+                Padding(
                 padding: const EdgeInsets.all(20.0),
-                child: Container(
+                  child: Container(
                   decoration: BoxDecoration(
                       boxShadow: [Shadow(Colors.black54)],
                       color: Colors.white,
@@ -70,13 +72,14 @@ class Add_account extends GetWidget<FireStoreViewModel> {
                       borderRadius:
                           const BorderRadius.all(Radius.circular(20))),
 
-                  /// login With email And password
-                  child: Padding(
+                    child: Padding(
                     padding: const EdgeInsets.all(20.0),
-                    child: Column(
-                      children: [
+                      child: Column(
+                        children: [
                         ///name input
-                        TEXTINPUTE(
+                          TEXTINPUTE(
+                          icon:  Icons.person,
+                          keyBoard:  TextInputType.text,
                           textAlign: TextAlign.right,
                           textDirection: TextDirection.rtl,
                           Controller: fullName,
@@ -88,15 +91,17 @@ class Add_account extends GetWidget<FireStoreViewModel> {
                             return null;
                           },
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15,
                         ),
 
                         ///address input
                         TEXTINPUTE(
+                          icon: Icons.location_on_outlined,
+                          keyBoard: TextInputType.text,
                           textDirection: TextDirection.rtl,
                           textAlign: TextAlign.right,
-                          Controller: Zone,
+                          Controller: zone,
                           Hint: "العنوان",
                           Validator: (value) {
                             if (value == null || value.isEmpty) {
@@ -111,6 +116,7 @@ class Add_account extends GetWidget<FireStoreViewModel> {
 
                         /// phone input
                         TEXTINPUTE(
+                          icon: Icons.phone_iphone_outlined,
                           textDirection: TextDirection.ltr,
                           textAlign: TextAlign.left,
                           Controller: phoneNumber,
@@ -120,7 +126,7 @@ class Add_account extends GetWidget<FireStoreViewModel> {
                               return 'رقم الهاتف غير موجود';
                             }
                             return null;
-                          },
+                          }, keyBoard: TextInputType.number,
                         ),
                         const SizedBox(
                           height: 15,
@@ -128,6 +134,8 @@ class Add_account extends GetWidget<FireStoreViewModel> {
 
                         ///birth date
                         TEXTINPUTE(
+                          icon: Icons.date_range_outlined,
+                          keyBoard: TextInputType.number,
                           textDirection: TextDirection.ltr,
                           textAlign: TextAlign.left,
                           Controller: bithDate,
@@ -146,11 +154,11 @@ class Add_account extends GetWidget<FireStoreViewModel> {
                             width: double.infinity,
                             height: 50,
                             child: Center(
-                              child: Container(
+                              child: SizedBox(
                                 height: 40,
                                 width: double.infinity,
                                 child: ElevatedButton(
-                                  onPressed: () {
+                                  onPressed: () async {
                                     // Validate returns true if the form is valid, or false otherwise.
                                     if (_formKey.currentState!.validate()) {
                                       ScaffoldMessenger.of(context)
@@ -159,10 +167,10 @@ class Add_account extends GetWidget<FireStoreViewModel> {
                                             content:
                                                 Text('تم اضافه المخدوم شكرا')),
                                       );
-                                      controller.addUser(
-                                          docName: 'users',
+                                       controller.addUser(
+                                          collectionName: 'users',
                                           data: UserModule(
-                                              Zone.text,
+                                              zone.text,
                                               bithDate.text,
                                               phoneNumber.text,
                                               fullName.text,

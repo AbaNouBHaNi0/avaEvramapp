@@ -1,5 +1,6 @@
 import 'package:auth_with_get/Shared/Components.dart';
-import 'package:auth_with_get/ViewModels/FireStoreViewModel.dart';
+import 'package:auth_with_get/ViewModels/AuthViewModel.dart';
+import 'package:auth_with_get/ViewModels/addUserviewMoudel.dart';
 import 'package:auth_with_get/Views/Content/Add_account_Form.dart';
 import 'package:auth_with_get/Views/Content/Delete%20_account.dart';
 import 'package:auth_with_get/Views/Content/Golden_badge.dart';
@@ -8,7 +9,7 @@ import 'package:auth_with_get/Views/Content/update_Personal_data.dart';
 import 'package:auth_with_get/Views/Content/seeAllaccounts.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-class Home extends GetWidget<FireStoreViewModel> {
+class Home extends GetWidget<addUserviewModel> {
   const Home({Key? key}) : super(key: key);
 
   @override
@@ -26,8 +27,10 @@ class Home extends GetWidget<FireStoreViewModel> {
           IconButton(
             color: Colors.black,
             icon: const Icon(Icons.logout),
-            onPressed: ()  {
-              controller.GoogleSignoutMethod();
+            onPressed: ()  async{
+              controller.googleSignout();
+               box.write('Token', null);
+               box.write('emailToken', null);
             }
 
           )
@@ -83,7 +86,7 @@ class Home extends GetWidget<FireStoreViewModel> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) =>  Add_account()));
+                                  builder: (context) =>  addAccount()));
                         },
                       ),
                     ),
@@ -203,7 +206,7 @@ class Home extends GetWidget<FireStoreViewModel> {
                         ),
                         onTap: () {
                           Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => const deleteAccount()));
+                              MaterialPageRoute(builder: (context) =>  deleteAccount()));
                         },
                       ),
                     ),

@@ -5,6 +5,6 @@ class Weakly_Attendace extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Center(child: Text(('Weakly_Attendace'),)),);
+    return const Scaffold(body: Center(child: Text(('Weakly_Attendace'),)),);
   }
 }
