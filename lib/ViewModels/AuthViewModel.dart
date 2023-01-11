@@ -10,6 +10,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 final box = GetStorage();
 class AuthViewModel extends GetxController
 {
+  var isPasswordhidden = true.obs;
   GoogleSignIn Inst = GoogleSignIn(scopes: ['email']);
   FirebaseAuth auth = FirebaseAuth.instance;
 

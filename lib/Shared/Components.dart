@@ -1,27 +1,25 @@
 import 'package:flutter/material.dart';
 
 class TEXTINPUTE extends StatelessWidget {
-   TEXTINPUTE({Key? key,   this.Controller, this.Hint, this.Validator , this.textDirection , this.textAlign}) : super(key: key);
+   TEXTINPUTE({Key? key,   this.icon ,required this.keyBoard ,this.Controller, this.Hint, this.Validator , this.textDirection , this.textAlign}) : super(key: key);
 final Controller;
 final Hint;
 final Validator;
 TextDirection? textDirection = TextDirection.ltr;
 TextAlign? textAlign = TextAlign.left;
+IconData? icon = Icons.account_circle_outlined;
+TextInputType keyBoard = TextInputType.emailAddress;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-
-
       textAlign: textAlign!,
       textDirection: textDirection,
       controller: Controller,
       validator: Validator,
-      keyboardType: TextInputType.emailAddress,
-
+      keyboardType: keyBoard,
       decoration: InputDecoration(
-        prefixIcon: Icon(Icons.account_circle_outlined),
+        prefixIcon: Icon(icon),
         labelText: "$Hint",
-        //icon: Icon(Icons.account_circle_outlined),
         fillColor: Colors.white,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
@@ -58,3 +56,10 @@ Shadow(color)
   );
 }
 
+textStyle()
+{
+  return  TextStyle(
+      color: Colors.white,
+      fontSize: 28,
+      fontFamily: "Timesnewroman");
+}
