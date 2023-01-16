@@ -7,10 +7,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:image_picker/image_picker.dart';
 
 // ignore: camel_case_types
 class addAccount extends GetWidget<addUserviewModel> {
   addAccount({Key? key} ) : super(key: key);
+
+  var imageUrl;
 
   final injection = AuthViewModel();
   final _formKey = GlobalKey<FormState>();
@@ -18,6 +21,7 @@ class addAccount extends GetWidget<addUserviewModel> {
   var zone = TextEditingController();
   var bithDate = TextEditingController();
   var phoneNumber = TextEditingController();
+  final ImagePicker _picker = ImagePicker();
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +98,6 @@ class addAccount extends GetWidget<addUserviewModel> {
                         const SizedBox(
                           height: 15,
                         ),
-
                         ///address input
                         TEXTINPUTE(
                           icon: Icons.location_on_outlined,
@@ -150,6 +153,8 @@ class addAccount extends GetWidget<addUserviewModel> {
                         const SizedBox(
                           height: 15,
                         ),
+
+
                         SizedBox(
                             width: double.infinity,
                             height: 50,
@@ -175,6 +180,7 @@ class addAccount extends GetWidget<addUserviewModel> {
                                               phoneNumber.text,
                                               fullName.text,
                                               box.read('username').toString(),
+                                              ''
 
                                           )
 

@@ -6,14 +6,12 @@ var documentID;
 
 class deleteUserviewModel extends GetxController
 {
-
    deleteUser({name , context}) async {
      DocumentSnapshot document = await FirebaseFirestore.instance.collection('users').doc(name).get();
 
     if (document.exists){
       showDialog(context: Get.context as BuildContext, builder: (context){
         return const Center(child: CircularProgressIndicator());
-
       });
 
       await FirebaseFirestore.instance.collection('users').doc(name).delete();
@@ -24,8 +22,7 @@ class deleteUserviewModel extends GetxController
               Text('تم حذف المخدوم شكرا')),
         );
 
-      Get.offAll(()=> Home());
-
+      Get.offAll(()=> const Home());
       return true;
     }
     else
@@ -38,12 +35,6 @@ class deleteUserviewModel extends GetxController
         );
 
       }
-
-
-
-
-
-
 
   }
 

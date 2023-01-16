@@ -86,14 +86,8 @@ class deleteAccount extends GetWidget<deleteUserviewModel> {
                                         // Validate returns true if the form is valid, or false otherwise.
                                         if (_formKey.currentState!.validate())
                                         {
-
-
                                           controller.deleteUser(name: deleteController.text , context: context);
-
-
-                                          }
-
-
+                                        }
                                       },
                                       child: const Text('حذف' ,style: TextStyle(
                                           color: Colors.white,

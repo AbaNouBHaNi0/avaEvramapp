@@ -1,5 +1,8 @@
+import 'package:auth_with_get/Views/Content/accountPage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 class seeAlldata extends StatelessWidget {
    seeAlldata({Key? key}) : super(key: key);
@@ -18,10 +21,13 @@ class seeAlldata extends StatelessWidget {
           );
         }
           return ListView(
-              children: snapshot.data.docs.map<Widget>((document) {
+              children: snapshot.data.docs.map<Widget>(
+                      (document) {
               number++;
             return InkWell(
-              onTap: (){},
+              onTap: (){
+                Get.off(()=>  accountpage(user: document,));
+              },
               child: Center(
                 child: ListTile(
                   leading: Text(number.toString()),
