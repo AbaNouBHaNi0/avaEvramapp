@@ -10,7 +10,6 @@ Map? dataMap;
 class addUserviewModel extends GetxController {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-
   void googleSignout() async {
     await FirebaseAuth.instance.signOut();
     Get.offAll(() =>  loginPage());
@@ -31,17 +30,6 @@ class addUserviewModel extends GetxController {
    }
 
 
-  //   await users.add({
-  //         'full_name': data!.fullName,
-  //         'phone_number': data.phoneNumber,
-  //         'bithDate': data.bithDate, // Stokes and Sons
-  //         'Zone': data.Zone,
-  //         'added_by':data.Added_by,
-  //         'Num_of_attendance': 0 // 42
-  //       })
-  //       .then((value) => print("User Added"))
-  //       .catchError((error) => print("Failed to add user: $error"));
-  // }
 
   addnamedUser() async {
    final docUser = FirebaseFirestore.instance.collection('users').doc('abanoub');
